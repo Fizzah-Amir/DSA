@@ -1,0 +1,67 @@
+struct Node{
+    int val;
+    Node* next;
+    Node(int x):val(x),next(nullptr){};
+}
+class MyLinkedList {
+private:
+    Node* head;
+    int size;
+public:
+    MyLinkedList() {
+      head=nullptr;
+    size=0;
+    } 
+    int get(int index) {
+        //curr->next gives you the address of the next node in the chain
+      if(index<0 || index>=size){
+          return -1;
+      }
+        
+        Node* cur=head;
+        int count=0;
+    while(cur!=nullptr){
+        if(count==index){
+            return curr->val;
+    }
+        curr=curr->next;
+        count++;
+    }
+     return -1;   
+    }
+    //with for loop;
+   // for(int i=0;i<index;i++){
+     //   curr=curr->next;
+   // }
+    //return curr->val;    
+    //} 
+    //finding middle of node
+   // Node* curr=head;
+   // int length=0;
+   // while(cur!=nullptr){
+      //  length++;
+        //curr=curr->next;
+    //}
+   // cur=head
+       // for(int i=0;i<length/2;i++){
+        //    curr=curr->next;
+       // }
+  //  return curr->val;
+    void addAtHead(int val) {
+        Node* new_node=new Node(val);
+      new_node->next=head;//ab new node ky baad head aaye ga
+        //ehle new node ko list se connect karo, phir head update karo
+          head=new_node;
+        size++;
+    }
+           
+    void addAtTail(int val) {
+       Node* curr=head;
+        Node* new_node=new Node(val);
+        while(curr->next!=nullptr){
+           curr=curr->next;
+        }
+        curr->next=new_node;
+        size++;
+    }
+    
