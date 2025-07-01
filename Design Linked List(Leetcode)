@@ -2,7 +2,7 @@ struct Node{
     int val;
     Node* next;
     Node(int x):val(x),next(nullptr){};
-}
+};
 class MyLinkedList {
 private:
     Node* head;
@@ -14,7 +14,7 @@ public:
     } 
     int get(int index) {
         //curr->next gives you the address of the next node in the chain
-      if(index<0 || index>=size){
+      if(index<0 ||index>=size){
           return -1;
       }
         
@@ -22,9 +22,9 @@ public:
         int count=0;
     while(cur!=nullptr){
         if(count==index){
-            return curr->val;
+            return cur->val;
     }
-        curr=curr->next;
+        cur=cur->next;
         count++;
     }
      return -1;   
@@ -58,10 +58,65 @@ public:
     void addAtTail(int val) {
        Node* curr=head;
         Node* new_node=new Node(val);
+        if(head==nullptr){
+            head=new_node;
+        }
+        else{
         while(curr->next!=nullptr){
            curr=curr->next;
         }
         curr->next=new_node;
+       
+        }
+        size++;//always size will be increemented regardless of what condirion at end
+    }
+    //Do it again 
+    void addAtIndex(int index, int val) {
+        if(index<0 || index>size){
+            return;
+        }
+      if(index==0){
+          addAtHead(val);
+          return;
+      }
+        if(index==size){
+            addAtTail(val);
+            return;
+        }
+        Node* curr=head;
+        Node* new_node=new Node(val);
+        int i=0;
+      while(i<index-1){//index-1 to before the index
+         curr=curr->next;
+          i++;
+      }
+        new_node->next=curr->next;
+        curr->next=new_node;
         size++;
     }
     
+        
+    void deleteAtIndex(int index) {
+        if(index<0 || index>=size || head==nullptr){
+            return;
+        }
+        if(index==0){
+            Node*temp=head;
+            head=head->next;//error can be if head is nullptr so null pointer dereference will happen here(empty list)
+            delete temp;
+        }
+        else{
+        Node* curr=head;
+        int i=0;
+        while(i<index-1){
+            curr=curr->next;
+            i++;
+        }
+            
+       Node* temp=curr->next;
+        curr->next=temp->next;
+        delete temp;
+    }
+        size--;
+    }
+};
