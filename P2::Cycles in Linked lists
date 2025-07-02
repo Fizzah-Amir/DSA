@@ -6,12 +6,15 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution { //floyd's cycle detection
 public:
     bool hasCycle(ListNode *head) {
-        Node* f=head;
-        Node* s=f;
-        while(f->next!=nullptr){
+        ListNode* f=head;
+        ListNode* s=f;
+        if(head==nullptr){
+            return false;
+        }
+        while(f!=nullptr && f->next!=nullptr && head!=nullptr){
            // f=f->next+2; wromg
             f=f->next->next;//moving ptr 2 step ahead
             s=s->next;//moving pointer 1 step ahead
@@ -21,6 +24,8 @@ public:
             else{
             continue;
             }
+           
         }
+        return false;
     }
 };
