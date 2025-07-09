@@ -1,1 +1,56 @@
+#include <iostream>
+using namespace std;
+class ListNode {
+	int val;
+	ListNode* next;
+public:
+	ListNode() : val(0), next(nullptr) {}
+	ListNode(int x) : val(x), next(nullptr) {}
+	ListNode(int x, ListNode* next) : val(x), next(next) {};
+	static ListNode* remove_elements(ListNode* head, int val) {
+		ListNode* curr = head;
+		ListNode* temp = nullptr;
+		ListNode* prev = nullptr;
+		while (curr != nullptr){
+			if (curr->val == val) {
+				temp = curr->next;
+				prev = curr;
+				prev->next = temp;
+				curr = curr->next;
+				delete curr;
+			}
+		}
+		return head;
+	}
+	static void display(ListNode* head) {
+
+			ListNode* curr = head;
+			while (curr != nullptr) {
+				cout << curr->val;
+				curr = curr->next;//always move regardless of next;
+		}
+	}
+};
+//method 2
+//ListNode* curr = head;
+//while (curr != nullptr) {
+//	cout << curr->val;
+//	if (curr->next != nullptr) {
+//		cout << "->";
+//	}
+//	curr = curr->next;//curr will still move even if next node next is nullptr;
+//
+//
+//}
+int main() {
+	ListNode *a=new ListNode(4, nullptr);
+	ListNode *b = new ListNode(3, a);
+	ListNode* c = new ListNode(2, b);
+	ListNode* head = new ListNode(1, c);//head points to start
+	ListNode::display(head);
+	ListNode* bad=ListNode::remove_elements(head, 3);
+	cout << bad;
+	return 0;
+
+}
 
