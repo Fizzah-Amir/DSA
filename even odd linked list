@@ -1,0 +1,59 @@
+class Solution {
+12
+public:
+13
+    ListNode* oddEvenList(ListNode* head) {
+14
+        ListNode* curr=head;
+15
+       size_t count=3;//now processing node 3 after assigning node 1 and 2
+16
+       ListNode* oddHead=head;
+17
+        //edge case
+18
+        if(head==nullptr || head->next==nullptr){ //if no nodes or one node head->next==nullptr 
+19
+            return head;
+20
+        }
+21
+           ListNode* oddTail=oddHead;
+22
+           ListNode* evenHead=head->next;//starting from next node as first node is odd
+23
+           ListNode* evenTail=evenHead;
+24
+          while(curr!=nullptr){
+25
+              if(count%2!=0){
+26
+              oddTail->next=curr;
+27
+              oddTail=oddTail->next;
+28
+          }
+29
+        else{
+30
+            evenTail->next=curr;
+31
+            evenTail=evenTail->next;
+32
+        }
+33
+        curr=curr->next;
+34
+        count++;
+35
+    }
+36
+    oddTail->next=evenHead;
+37
+    evenTail->next=nullptr;
+38
+    return oddHead;
+39
+}
+40
+};
