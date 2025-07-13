@@ -1,0 +1,47 @@
+// decimal to binary.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+#include <iostream>
+#define stack_size 100
+int stack[stack_size];
+int top = -1;
+using namespace std;
+bool empty() {
+	if (top == -1) {
+		return true;
+	}
+	return false;
+}
+
+void push(int x) {
+	if (top >= stack_size-1) {
+		return;
+	}
+	stack[++top] = x;//pehlay stack may dalay gy phir increement krn gy
+}
+
+int pop() {
+	if (empty()) {
+		return -1;
+	}
+	int popped = stack[top];
+	top--;
+	return popped;
+}
+
+void  convert(int decimal) {
+	int num;
+	while (decimal>0) {//my condition num/2!=0 will exit early leading to miss last remainder
+		num = decimal % 2;
+		push(num);
+		decimal = decimal / 2;
+	}
+}
+int main() {
+	convert(10);
+	while (!empty()) {
+		cout << pop();
+	}
+
+
+	return 0;
+}
