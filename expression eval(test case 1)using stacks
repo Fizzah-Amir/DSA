@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+// postfix to infix using stacks.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+using namespace std;
+#define maxi_size 100
+int opera[maxi_size];//use int stack for evaluations
+//+,-,*
+int top = -1;//for different stacks different top values also	
+bool empty() {
+	if (top == -1) {
+		return true;
+	}
+	return false;
+}
+
+void push(int x) {
+	if (top >= maxi_size - 1) {
+		return; 
+	}
+	opera[++top] = x;//pehlay stack may dalay gy phir increement krn gy
+}
+
+int pop() {
+	if (empty()) {
+		return -1;
+
+	}
+	int popped = opera[top];
+	top--;
+	return popped;
+}
+bool is_operator(char ch) {
+	if (ch == '-' || ch == '+' || ch == '*' || ch == '/' || ch == '^') {
+		return true;
+	}
+	return false;
+}
+bool is_operand(char ch) {
+	if (ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122) {
+		return true;
+	}
+	return false;
+}
+int  is_number(char c) {//in postfix i am doing with a string so char so it will
+	//not work
+	/*if (c>=0 && c <=9) {
+		return true;
+	}
+	return false;*/
+	if (c >= '0' && c <= '9') {
+		return c - '0';
+	}
+	return -1;
+}
+int precedence(char op) {
+	if (op == '^') {
+		return 3;
+	}
+	if (op == '+' || op == '-') {
+		return 1;
+	}
+	if (op == '*' || op == '/') {
+		return 2;
+	}
+	return 0;
+}
+int evaluator(string exp) {
+	int arr[50];
+	int sum = 0;
+	for (int i = 0; i < exp.length(); i++) {
+			//
+			// push(exp[i]);//pushing the char instead of returned no by func
+			int num = is_number(exp[i]);
+			if (num != -1) {
+				push(num);
+			}
+		else if (is_operator(exp[i])) {
+				int a = pop();
+				int b = pop();
+				switch (exp[i]) {
+				case '+':
+					push(a + b);
+					break;
+				case '-':
+					push(a - b);
+					break;
+				case '*':
+					push(a * b);
+					break;
+				case '/':
+					push(a / b);
+					break;
+				}
+				return pop();
+		}
+	}
+	return sum;
+}
+int main() {
+	string e = "72+";
+	int g = evaluator(e);
+	cout << g;
+}
