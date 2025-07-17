@@ -78,8 +78,8 @@ int evaluator(string exp) {
 				push(num);
 			}
 		else if (is_operator(exp[i])) {
+				int b = pop();//second operand to be popped first 
 				int a = pop();
-				int b = pop();
 				switch (exp[i]) {
 				case '+':
 					push(a + b);
