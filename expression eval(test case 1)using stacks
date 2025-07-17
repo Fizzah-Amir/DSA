@@ -68,8 +68,7 @@ int precedence(char op) {
 	return 0;
 }
 int evaluator(string exp) {
-	int arr[50];
-	int sum = 0;
+	
 	for (int i = 0; i < exp.length(); i++) {
 			//
 			// push(exp[i]);//pushing the char instead of returned no by func
@@ -94,10 +93,10 @@ int evaluator(string exp) {
 					push(a / b);
 					break;
 				}
-				return pop();
+				
 		}
 	}
-	return sum;
+	return pop();
 }
 int main() {
 	string e = "72+";
