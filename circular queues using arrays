@@ -1,0 +1,53 @@
+// circular Queues.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#define s 10
+int queue[s];
+int front = -1;
+int rear = -1;
+using namespace std;
+void enqueue(int x) {
+	if (front == -1 && rear == -1) {
+		front = 0;
+		rear = 0;
+		queue[rear] = x;
+	}
+	//this condition also written like if front==rear+1 or (rear+1)%length
+	else if ((rear + 1) % s == front) {
+		cout << "queue is full";
+	}
+	else {
+		rear = (rear + 1) % s;//jb last pr aai ga to first place pr jai ga else increements one(rear++)
+		queue[rear] = x;
+	}
+}
+void display() {
+	int i = 0;
+	while (i != rear) {
+		i = (i + 1) % s;
+		cout << queue[i];
+	}
+	cout << queue[rear];
+}
+void deque() {
+	if (front == -1 && rear == -1) {
+		cout << "queue is empty";
+	}
+	else if (front == rear) {
+		cout << "queue is full";
+	}
+	else {
+		cout << "dequed element" << queue[front] << endl;
+		front = (front + 1) % s;
+	}
+
+}
+int main() {
+	enqueue(34);
+	enqueue(31);
+	enqueue(9);
+	deque();
+	display();
+	return 0;
+}
