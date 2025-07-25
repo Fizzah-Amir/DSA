@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+struct node {
+	int data;
+	struct node* next;
+public:
+	node(int x) {
+		data = x;
+		next = nullptr;
+	}
+};
+struct node* front = 0;
+struct node* rear = 0;
+void enqueue(int x) {
+	node* new_node = new node(x);
+	if (front ==0 && rear == 0) {
+		front = rear = new_node;
+	}
+	else {
+		rear->next = new_node;
+		rear = new_node;
+	}
+}
+void display() {
+	node* temp;
+	if (front == 0 && rear == 0) {
+		cout << "empty";
+	}
+	else {
+		temp = front;
+		while (temp != NULL) {
+			cout << temp->data ;
+			temp = temp->next;
+			cout << endl;
+		}
+	}
+}
+void deque() {
+	node* temp = front;
+	if (front ==0 && rear == 0) {
+		cout << "queue is empty";
+	}
+	cout << "dequed element";
+	front = front->next;
+//if we just removed the last element
+//If front becomes nullptr(after removing the last element),we must do rear = nullptr.
+//Otherwise, rear would point to freed memory(dangling pointer)
+	if (front == nullptr) {
+		rear = nullptr;
+	}
+	delete temp;
+}
+void peek() {
+	if (front ==0 &&  rear == 0) {
+		cout << "queue is empty";
+	}
+	cout << front->data;
+}
+int main() {
+	enqueue(15);
+	enqueue(20);
+	enqueue(30);
+	display();
+	deque();
+	display();
+	return 0;
+}
