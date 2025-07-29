@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+int max_profit(int arr[], int s) {
+	int min = arr[0];
+	int max_profit = 0;
+	for (int i = 0; i < s; i++) {
+		if (arr[i] < min) {
+			min = arr[i];
+		}
+		else {
+			int profit = arr[i] - min;
+			if (profit > max_profit) {
+				max_profit = profit;
+			}
+		}
+	}
+	return max_profit;
+}
+int main() {
+	int s;
+	cout << "enter size and elements";
+	cin >> s;
+		int* arr = new int[s];
+		cout <<"enter elements in the array";
+		for (int i = 0; i < s; i++) {
+			cin >> arr[i];
+		}
+		int l = max_profit(arr, s);
+		cout << l;
+}
+//int minn(int arr[], int s) {
+//	int k;
+//	int min = arr[0];
+//	for (int i = 0; i < s; i++) {
+//		if (arr[i]  <min) {
+//			min = arr[i];
+//		}
+//	}
+//	for (int i = 0; i < s; i++) {
+//		if (arr[i] == min) {
+//			return i;//index dy rha hai
+//		}
+//	}
+//}
+//int max_profit(int arr[],int si) {
+//	int f = minn(arr, si);
+//	for (int j = f; j < si; j++) {
+//		if (arr[j] > arr[f]) {
+//			arr[f] = arr[j];
+//		}
+//	}
+//	return arr[f];
+//}
+//int main() {
+//	int s;
+//	int maxi_profit = 0;
+//	cout << "enter size and elements";
+//	cin >> s;
+//	int* arr = new int[s];
+//	cout <<"enter elements in the array";
+//	for (int i = 0; i < s; i++) {
+//		cin >> arr[i];
+//	}
+//	int g = minn(arr, s);
+//
+//	cout << "min element is" << arr[g] << endl;
+//	int l=max_profit(arr, s);
+//	maxi_profit = l - arr[g];
+//	cout << maxi_profit;
+//	if (g > l) {
+//		maxi_profit = 0;
+//		cout << maxi_profit;
+//	}
+//	return 0;
+//}
