@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+using namespace std;
+class Vector_PQ{
+vector<int> v;
+public:
+Vector_PQ(){}
+void enqueue(int val){
+  int index_to_insert=0;
+  for(int i=0;i<v.size();i++){
+    int current=v[i];
+    if(val>current){
+      index_to_insert=i;
+      break;
+    }
+    index_to_insert++;
+  }
+  v.insert(v.begin()+index_to_insert,val);
+}
+int deque(){
+  if(is_Empty()){
+    throw std::underflow_error("priority queue is empty");
+  }
+  int val=v[0];
+  v.erase(v.begin());
+  return val;
+}
+int peek()const{
+  if(is_Empty()){
+    throw std::underflow_error("queue is empty");
+  }
+  return v[0];
+}
+int get_size()const{
+  return v.size();
+}
+bool is_Empty()const{
+  return v.empty();
+}
+};
+int main() {
+  Vector_PQ p;
+  p.enqueue(4);
+  p.enqueue(3);
+  p.enqueue(9);
+  cout<<"highest priority queue"<<p.peek();
+  cout<<"priorty queue size"<<p.get_size();
+  cout<<"deque result"<<p.deque();
+  return 0;
+}
